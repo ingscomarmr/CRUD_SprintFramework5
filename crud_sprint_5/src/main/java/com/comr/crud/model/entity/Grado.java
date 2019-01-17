@@ -21,7 +21,7 @@ public class Grado implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="grado_id")
-	private Integer usuarioId;
+	private Integer gradoId;
 	
 	private String nombre;
 	
@@ -29,15 +29,23 @@ public class Grado implements Serializable{
 	private Integer usuarioIdMod;
 	
 	@Column(name="fecha_modificacion")
-	@Temporal(TemporalType.TIMESTAMP)
 	private Timestamp fechaModificacion;
 
-	public Integer getUsuarioId() {
-		return usuarioId;
+	@Column(name="eliminado")
+	private int eliminado;
+	
+	public Grado() {}
+	
+	public Grado(int id) {
+		this.gradoId = id;
+	}
+	
+	public Integer getGradoId() {
+		return gradoId;
 	}
 
-	public void setUsuarioId(Integer usuarioId) {
-		this.usuarioId = usuarioId;
+	public void setGradoId(Integer gradoId) {
+		this.gradoId = gradoId;
 	}
 
 	public String getNombre() {
@@ -63,6 +71,15 @@ public class Grado implements Serializable{
 	public void setFechaModificacion(Timestamp fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
 	}
+
+	public int getEliminado() {
+		return eliminado;
+	}
+
+	public void setEliminado(int eliminado) {
+		this.eliminado = eliminado;
+	}
+	
 	
 	
 }
