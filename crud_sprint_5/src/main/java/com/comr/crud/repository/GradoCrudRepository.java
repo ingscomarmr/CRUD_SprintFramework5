@@ -13,6 +13,8 @@ import com.comr.crud.model.entity.Grado;
 public interface GradoCrudRepository extends CrudRepository<Grado, Integer>{
 	//puedes describir consultas con tansolo ponder findBy
 	List<Grado> findByNombreOrderByNombre(String nombre);
+	List<Grado> findByNombreLikeAndEliminadoOrderByNombre(String nombre, int isDelete);
+	List<Grado> findByEliminadoOrderByNombreDesc(int isDelete);
 	List<Grado> findAll();
 	Grado findByGradoId(int id);
 	void deleteByNombre(String nombre);
