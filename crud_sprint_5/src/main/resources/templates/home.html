@@ -1,32 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"> <!-- se agrega este espacio de nombre para usar thymelead  xmlns:th="http://www.thymeleaf.org -->
+<html xmlns:th="http://www.thymeleaf.org" th:include="layout :: page">
+<!-- se agrega este espacio de nombre para usar thymelead  xmlns:th="http://www.thymeleaf.org -->
 <head>
 <meta charset="UTF-8" />
 <!-- con th : text = "$ { propieda pasada en el modelo}" accedemos al valor th:text="${title}"  -->
-<title th:text="${title}">Insert title here</title>
-<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="/css/bootstrap.min.css">
-<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<title th:fragment="title_page">Home</title>
+
 </head>
 <body>
-	
-	<div class="container">
-		<div class="row">
-			<div class="jumbotron">
-				<h1 class="display-4">CRUD WITH SPRINT FRAMEWORK 5</h1>
-				<hr class="my-4">
-				<div>
-					<ul>
-						<li><a href="/grados">Save a new Grado</a></li>		
-						<li><a href="#">Grid with all</a></li>			
-					</ul>
-				</div>
-			</div>
-			
-		</div>
+
+	<h1 class="display-4" th:fragment="title_secction">CRUD WITH SPRINT FRAMEWORK 5</h1>
+	<div class="mycontainer" th:fragment="content">
+		<ul>
+			<li><a href="/grados">Save a new Grado</a></li>
+			<li><a href="#">Grid with all</a></li>
+		</ul>
 	</div>
 	
-	
-	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}" src="/js/bootstrap.min.js"></script>
-	<script type="text/javascript" th:src="@{/js/popper.min.js}" src="/js/popper.min.js"></script>
 </body>
 </html>

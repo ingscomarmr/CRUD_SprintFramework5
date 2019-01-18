@@ -1,60 +1,44 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:include="layout :: page">
 <head>
 <meta charset="UTF-8">
-<title>GRADOS</title>
-<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
-	href="/css/bootstrap.min.css">
-<script type="text/javascript" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<title th:fragment="title_page">GRADOS</title>
+
 </head>
 <body>
 
-	<div class="container">
-		<div class="row">
-			<div class="col">
 
-				<div class="jumbotron">
-					<h1 class="display-4">GRADOS EXISTENTES</h1>
-					<hr class="my-4">
-					<div>
-						<form action="/grados" method="get" class="form-inline">
-							<label>Buscar:</label>&nbsp; <input th:value="${buscar}"
-								class="form-control" id="txtBuscar" name="txtBuscar" type="text" />
-							&nbsp;
-							<button type="submit" class="btn btn-primary">Buscar</button>
-							&nbsp;
-							<button type="button" class="btn btn-warning">Nuevo</button>
-							&nbsp;
-						</form>
-					</div>
-					<br />
+	<h1 class="display-4" th:fragment="title_secction">GRADOS EXISTENTES</h1>
 
-					<table class="table table-hover table-dark">
-						<thead>
-							<tr>
-								<th scope="row" style="width: 150px;">Action</th>
-								<th scope="col">ID</th>
-								<th scope="col">Grado</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="g: ${gradosList}">
-								<td><a href="#">Editar</a>|<a href="#">Eliminar</a></td>
-								<td th:text="${g.gradoId}">1</td>
-								<td th:text="${g.nombre}">Grado I</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
-			</div>
+	<div th:fragment="content">
+		<div>
+			<form action="/grados" method="get" class="form-inline">
+				<label>Buscar:</label>&nbsp; <input th:value="${buscar}"
+					class="form-control" id="txtBuscar" name="txtBuscar" type="text" />
+				&nbsp;
+				<button type="submit" class="btn btn-primary">Buscar</button>
+				&nbsp;
+				<button type="button" class="btn btn-warning">Nuevo</button>
+				&nbsp;
+			</form>
 		</div>
+		<br />
 
+		<table class="table table-hover table-dark">
+			<thead>
+				<tr>
+					<th scope="row" style="width: 150px;">Action</th>
+					<th scope="col">ID</th>
+					<th scope="col">Grado</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="g: ${gradosList}">
+					<td><a href="#">Editar</a>|<a href="#">Eliminar</a></td>
+					<td th:text="${g.gradoId}">1</td>
+					<td th:text="${g.nombre}">Grado I</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
-
-	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"
-		src="/js/bootstrap.min.js"></script>
-	<script type="text/javascript" th:src="@{/js/popper.min.js}"
-		src="/js/popper.min.js"></script>
-</body>
 </html>
