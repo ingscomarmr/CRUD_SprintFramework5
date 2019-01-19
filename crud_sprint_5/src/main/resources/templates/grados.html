@@ -18,7 +18,7 @@
 				&nbsp;
 				<button type="submit" class="btn btn-primary">Buscar</button>
 				&nbsp;
-				<button type="button" class="btn btn-warning">Nuevo</button>
+				<a th:href="@{/grado_ver}" class="btn btn-warning">Nuevo</a>
 				&nbsp;
 			</form>
 		</div>
@@ -34,11 +34,20 @@
 			</thead>
 			<tbody>
 				<tr th:each="g: ${gradosList}">
-					<td><a href="#">Editar</a>|<a href="#">Eliminar</a></td>
+					<td>
+						<a th:href="@{/grado_ver?gradoId=} + ${g.gradoId}">Editar</a>
+							&nbsp;|&nbsp;
+						<a th:href="@{/grado_eliminar/} + ${g.gradoId}">Eliminar</a>
+					</td>
 					<td th:text="${g.gradoId}">1</td>
 					<td th:text="${g.nombre}">Grado I</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+	
+	<section th:fragment="scripts_page">
+		<!-- sin scripts para grados -->
+	</section>
+	
 </html>
