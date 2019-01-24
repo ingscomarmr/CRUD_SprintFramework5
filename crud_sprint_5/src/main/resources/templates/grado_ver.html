@@ -27,7 +27,7 @@
 			<div class="form-group row">				
 				<div class="col-sm-6">
 					<input type="submit" class="btn btn-primary" value="Guardar"/>
-					<a th:href="@{/grado_eliminar} + *{gradoId}" class="btn btn-danger">Eliminar</a>
+					<a th:href="@{/grado_eliminar} + *{gradoId}" class="btn btn-danger" onclick="return confirm('¿Estas seguro de que desea eliminar?');">Eliminar</a>
 					<a th:href="@{/grado_ver}" class="btn btn-warning" >Nuevo</a>
 				</div>
 			</div>

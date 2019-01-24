@@ -37,7 +37,7 @@
 					<td>
 						<a th:href="@{/grado_ver?gradoId=} + ${g.gradoId}">Editar</a>
 							&nbsp;|&nbsp;
-						<a th:href="@{/grado_eliminar/} + ${g.gradoId}">Eliminar</a>
+						<a th:href="@{/grado_eliminar/} + ${g.gradoId}" onclick="return confirm('¿Estas seguro de que desea eliminar?');">Eliminar</a>
 					</td>
 					<td th:text="${g.gradoId}">1</td>
 					<td th:text="${g.nombre}">Grado I</td>

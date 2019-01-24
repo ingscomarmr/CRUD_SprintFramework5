@@ -5,14 +5,13 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.comr.crud.model.entity.Grado;
-import com.comr.crud.repository.GradoCrudRepository;
+import com.comr.crud.service.GradoServiceImp;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,20 +23,13 @@ public class GradoController {
 
 	private static final Log log = LogFactory.getLog(GradoController.class);
 	
-	@Autowired
-	@Qualifier("gradoCrudRepository")
-	GradoCrudRepository gradoCrudRepository;
+	@Autowired	
+	GradoServiceImp gradoService;
 	
 	@GetMapping("/grados")
 	public String getGradoView(Model model, @RequestParam(defaultValue="",name="txtBuscar",required=false) String buscar) {		
 		log.info("/grados -> ver todos los grados filtrados por:" + buscar);
-		List<Grado> gradoList = null;
-		if(buscar != null && buscar.length() > 0) {			
-			gradoList = gradoCrudRepository.findByNombreLikeIgnoreCaseAndEliminadoOrderByNombre("%" + buscar + "%", 0);
-		}else {
-			gradoList = gradoCrudRepository.findByEliminadoOrderByNombreDesc(0);
-		}
-		
+		List<Grado> gradoList = gradoService.getGradosToGrid(buscar);				
 		model.addAttribute("buscar",buscar);
 		model.addAttribute("gradosList", gradoList);
 		
@@ -49,7 +41,7 @@ public class GradoController {
 		log.info("/grado_ver -> ver el grado " + id);
 		Grado grado = new Grado();
 		if(id > 0) {
-			grado = gradoCrudRepository.findByGradoId(id);
+			grado = gradoService.findById(id);
 		}
 		model.addAttribute("grado", grado);
 		return "grado_ver";
@@ -58,21 +50,20 @@ public class GradoController {
 	@RequestMapping(value="/grado_guardar", method=RequestMethod.POST)
 	public String saveGrado(Grado g) {
 		log.info("/grado_guardar -> guardar el grado");
-		if(g != null) {
-			gradoCrudRepository.save(g);
-		}
-		
+		try {
+			if(g != null) {
+				gradoService.Guardar(g);
+			}
+		}catch(Exception ex) {
+			log.error("Error al guardar", ex);			
+		}			
 		return "redirect:/grados";
 	}
 	
 	@RequestMapping(value="/grado_eliminar/{id}", method=RequestMethod.GET)
 	public String eliminarGrado(@PathVariable(value="id") int id) {
 		log.info("/grado_ver -> eliminar el grado:" + id);
-		Grado g = gradoCrudRepository.findByGradoId(id);
-		if(g != null) {
-			gradoCrudRepository.delete(g);
-		}
-		
+		gradoService.Eliminar(id);		
 		return "redirect:/grados";
 	}
 	
